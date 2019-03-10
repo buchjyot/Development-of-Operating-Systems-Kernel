@@ -1,0 +1,111 @@
+			Last revised 10-Jan-17
+
+			  Questionnaire for
+
+		 Harvard Extension School CSCI E-92:
+		   Principles of Operating Systems
+
+			     Spring 2017
+
+
+Name:				  Home/Cellular phone number:
+Jyot Buch			  980-267-8794
+
+E-mail:				  Work phone number:
+jyb487@g.harvard.edu              508-647-1298
+
+Where are you located?  What is your time zone?
+50, Dinsmore Avenue, Framingham, MA, 01702, USA
+Time Zone : Eastern Standard Time (EST)
+
+So that we can meet on-line, if necessary, what is your Skype name
+and/or your Google Hangouts name?
+skype: jyot.buch
+Google Hangouts: buchjyot@gmail.com
+
+Occupation (If an undergraduate student, please specify your major and
+year and at which school; If a graduate student, please specify your
+department, field, and year and at which school).
+I completed my Masters of Science in Electrical Engineering in May 2016,
+from the University of North Carolina at Charlotte, with focus in Control
+Systems and Optimization.
+
+Are you currently enrolled in a degree program?
+No
+
+Have you taken:
+  CSCI E-10a (Formerly CSCI E-50a) (Introduction to Computer Science
+      Using Java I),
+  CSCI E-10b (Formerly CSCI E-50b) (Introduction to Computer Science
+      Using Java II),
+  CSCI E-50 (Formerly CSCI E-52) (Intensive Introduction to Computer
+      Science),
+  CSCI E-28 (Formerly CSCI E-215) (Unix/Linux Systems Programming),
+  CSCI E-124 (Data Structures and Algorithms),
+  or equivalents
+(specify which)?
+No, I have not taken any of them. 
+
+Have you taken CSCI E-22 (Formerly CSCI E-119) (Data Structures)?
+
+	If not, how do you meet the prerequisite?
+No, I have not taken the Data Structures course, but I have a good programming 
+experiance. Moreover, along with the course, I plan to learn some of the key 
+requirements of understanding and implementing data structures such as linked list,
+hash tables etc.. 
+
+Do you have experience using Unix?  Do you have experience programming
+using Unix system calls?  If yes, please describe.  If not, how do you
+meet the prerequisite?
+Yes, I have experiance using UNIX, I have a basic experiance with system calls,
+which includes low level file I/O operations. 
+
+Are you already registered for this class?  -- If not, do you intend
+to register?  Also, are you registered as a distance student?  Do you
+intend to attend classes in person?
+Yes, I am registered for the class and I intend to attend classes in person. 
+
+If you are a distance student, have you already ordered and/or
+received the Freescale K70 development modules (TWR-K70F120M-KIT
+(which includes TWR-K70F120M, TWR-SER, TWR-ELEV) and the TWR-LCD-RGB)?
+Note: If the TWR-K70F120M-KIT is not available, the individual
+components should be ordered.
+Not Applicable
+
+Are you taking the course for undergraduate credit, graduate credit,
+or noncredit?
+Graduate Credit
+
+What additional appropriate course or work experience do you have?
+Work experiance with basic OS command line commands for WINDOWS, LINUX and MAC. 
+
+What is your math background?
+My background is in Control Systems and Optimization. I have taken MATH courses in my 
+undergrad and grad which involved multivariable calculas, linear algebra, optimization,
+probablity, Statastics, Random Processes, etc. 
+
+What computer languages do you know (please include assembler and
+high-level languages)?  Have you programmed in the C Programming
+Language, C++, or Java?
+I know C, C++, MATLAB, Python. 
+I have worked with 8051 and PIC micro-controlers 
+
+What operating systems have you used (e.g. Windows, Mac OS, Linux,
+iOS, Android, etc.)?
+Windows, Mac OS, Linux, iOS, Android
+
+What computers have you used (i.e., which machine language instruction
+sets)?
+I have not worked directly with computer instructions sets, but I have programmed embedded 
+micr-controllers such as 8051.
+
+Why are you taking the course?
+I am taking this course to enhance my knowledge and skills. Moreover, I work on the product called Simulink
+Desktop Real-Time, which interacts with the OS in real time. This course will help me 
+understand MATLAB and Simulink better in the way they interacts with the OS. Hence, enables me to be more
+proficient in my work. 
+
+If the class needs to be rescheduled, is Thursday evening acceptable?
+Yes
+
+Other comments:

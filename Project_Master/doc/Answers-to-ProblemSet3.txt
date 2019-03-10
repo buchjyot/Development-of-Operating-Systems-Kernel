@@ -1,0 +1,289 @@
+			Last revised 8-Mar-17
+
+			    Problem Set 3
+
+		 Harvard Extension School CSCI E-92:
+	    Principles of Operating Systems - Spring 2017
+
+		   Due: March 19, 2017 at Midnight
+
+
+1. (25 Points) Memory Management.
+
+The following program is run on two different computers with the same
+command line arguments.
+
+
+  #include <stdio.h>
+
+  int main(int argc, char *argv[]) {
+    printf("%d %d\n", *(int *)argv[1], *(int *)argv[2]);
+    return 0;
+  }
+
+
+On computer A, which has a Digital Equipment Corporation (DEC) Alpha
+processor, it produces this output:
+
+1701998445 1936942444
+0x65726F6D 0x7373656C
+erom       ssel
+
+On computer B, which is an IBM System/360, it produces this output:
+
+1836020325 1818588019
+0x6D6F7265 0x6C657373
+more       less
+
+  a. (10 Points) Why does the same program produce different outputs
+  on these two machines?  What is different about these computers?
+  Exactly how does this difference affect the output?
+  
+  Looking at the orders of bytes in which the data is interpreted by the machine, it appears to be
+  related to endiannes of both the machines.
+   
+  Endianness refers to the sequential order used to numerically interpret a range of bytes 
+  in computer memory as a larger, composed word value. It also describes the order of byte 
+  transmission over a digital link. Words may be represented in big-endian or little-endian 
+  format, with the term "end" denoting the front end or start of the word, a nomenclature 
+  potentially counterintuitive given the connotation of "finish" or "final portion" associated 
+  with "end" as a stand-alone term in everyday language. 
+  
+  When storing a word in big-endian format the most significant byte, which is the byte containing
+  the most significant bit, is stored first and the following bytes are stored in decreasing
+  significance order with the least significant byte, which is the byte containing the least
+  significant bit, thus being stored at last place. Little-endian format reverses the order of
+  the sequence and stores the least significant byte at the first location with the most 
+  significant byte being stored last.
+  
+  Computer A(Digital Equipment Corporation (DEC) Alpha processor) uses a Bi-endian format to
+  interpret the bytes in computer memory. The word bi-endian, when said of hardware, denotes 
+  the capability of the machine to compute or pass data in either endian format i.e. Little-Endian or 
+  Big-Endian. Whereas, Computer B(IBM System/360) uses Big-Endian format for representing the data.
+  
+  Observing the difference in the ouput of the same argv[] strings, it can be argued that the machine
+  A is configured to use Little-endian format and machine B uses Big-endian format as stated above. 
+  Because of this difference if we convert the hex value of the integer, we get 0x65726F6D and 0x6D6F7265.
+  Notice that for which machine A interprets as MSB(Most Significant Byte), machine B interprets as 
+  LSB(Least Significant Byte) for all the 4 bytes.
+  
+  b. (5 Points) What command line was used in both cases?
+  
+  If the file name for the code is main.c then following command line arguments will produce the same output
+  as mentioned in problem 1. 
+  
+  Fact that intel processors are little-endian similar to DEC-ALPHA(Machine A), If I run the above code in my 
+  computer then I would expect the ouput same as machine A. 
+  
+  > ./main more less
+  
+  Hence, argv[1] = "more"
+		 argv[2] = "less"
+
+  c. (10 Points) If the following program was run with the same
+  command line arguments as for the program above, on which of these
+  computers would the printf output be correct (i.e., the printf
+  ourput would be a true statement)?
+
+
+  #include <stdio.h>
+
+  int main(int argc, char *argv[]) {
+    int before = *(int *)argv[1] < *(int *)argv[2];
+    printf("\"%s\" is %s \"%s\" in alphabetical order\n", 
+	   argv[1], before ? "before" : "not before", argv[2]);
+    return 0;
+  }
+
+  If I run this code in my computer (intel processor)(Little-Endian) it produces the output 
+  as - "more" is before "less" in alphabetical order - which is wrong. 
+  
+  So, the machine B (IBM System/360) which is Big-Endian machine should produce the correct ouput. 
+  "more" is not before "less" in alphabetical order. 
+  
+2. (24 Points) Memory Allocation.  Tanenbaum 4/e 3.4 (Tanenbaum 3/e
+3.4, Tanenbaum 2/e 4.5)
+
+Consider a swapping system in which memory consist of the following hole sizes in memory order: 
+10 MB, 4 MB, 20 MB, 18 MB, 7 MB, 9 MB, 12 MB, 15 MB. Which hole is taken for successive segment request.
+
+  (6 Points) First fit for request (a), followed by (b), then (c).
+  First fit for request(a) takes 20 MB, for request(b) takes 10 MB, for for request(c) 18 MB. 
+
+  (6 Points) Best fit for request (a), followed by (b), and (c).
+  Best fit for request(a) takes 12 MB, for request(b) takes 10 MB, for for request(c) 9 MB. 
+
+  (6 Points) Worst fit for request (a), followed by (b), and (c).
+  Worst fit for request(a) takes 20 MB, for request(b) takes 18 MB, for for request(c) 15 MB. 
+  
+  (6 Points) Next fit for request (a), followed by (b), and (c).
+  Next fit for request(a) takes 20 MB, for request(b) takes 18 MB, for for request(c) 9 MB. 
+
+3. (16 Points) Page Replacement Algorithms.  Tanenbaum 4/e 3.36
+(Tanenbaum 3/e 3.28, Tanenbaum 2/e 4.29)
+
+  (4 Points) NRU.
+  (4 Points) FIFO.
+  (4 Points) LRU.
+  (4 Points) Second chance.
+  
+  NRU removes page 2. 
+  FIFO removes page 3. 
+  LRU removes page 1. 
+  Second chance removes page 2.
+
+4. (150 Points) Input/Output Programming.  Design and code a
+device-independent system that allows input and/or output operations
+to a variety of hardware devices.  For this problem set, the supported
+devices will be the LEDs, the pushbuttons, and an in-memory file
+system based on your myMalloc and myFree infrastructure.
+
+This problem set should be implemented on the Freescale K70 Tower
+system.  Therefore, your current myMalloc and myFree functions need to
+be ported from Unix to the K70 environment.  Keep in mind that the K70
+has 128K bytes of static RAM and, therefore, the built-in malloc call
+supports a maximum size that is substantially less than 128K bytes.
+It is likely that the maximum size memory request for a successful
+system malloc call will be about 64K bytes.  Depending on how much RAM
+the system and your program uses, you may find that you are able to
+allocate substantially less than 64K bytes of memory.
+
+You are required to use UART serial port I/O for your shell's
+interaction with the user.  That is, all of a user's usual interaction
+with your operating system will take place over the UART-driven serial
+port rather than through console I/O (semi-hosting).  Feel free to use
+the uart.h and uart.c code from the class web site to accomplish this.
+If you wish, in addition to the UART serial port I/O, you can use
+console I/O (semi-hosting) for outputting debugging messages.  Any
+output over console I/O (semi-hosting) must be able to be disabled and
+removed from your program using an #if, #ifdef, or #ifndef
+preprocessor directive.  If you are using KDS as your development
+environment, keep in mind that console input under KDS is not
+implemented.  If you are using console I/O under CodeWarrior, when
+creating this CodeWarrior project specify "Debugger Console" under
+"I/O Support" in the "Language and Build Tools Options" screen.
+
+Any use of printf, fprintf, and similar functions in your OS will need
+to be changed to snprintf calls to produce formatted output into a
+string that can then be output using UART I/O.
+
+Your device-independent I/O system should be based on byte-size input
+and output operations, customarily named fgetc and fputc,
+respectively.  These calls require a file to be opened before
+operations are performed and closed after operations are performed.
+The functions to perform those operations are customarily named fopen
+and fclose, respectively.  Traditionally, fopen returns a pointer to
+an object that can be used to control the input and output operations
+-- we'll refer to this pointer as a stream.  Streams in the ISO C
+Standard are declared as "FILE *" -- that is, as pointer to FILE.  In
+the Standard, there are some predefined streams (stdin, stdout, and
+stderr) that have predefined values and can be used without requiring
+calls to fopen and fclose.  If you choose to implement these, they
+should be opened by your operating system before starting to run the
+"application."  Of course, your design does not need to use this
+specific mechanism or these same names nor does your design need to
+use exactly the same parameters or return values.  However, unless you
+have another design that you'd like to pursue, we encourage you to
+implement the usual ISO C/POSIX standard calls.
+
+The stream would contain all information necessary to perform the
+fgetc, fputc, and fclose operations correctly.  Thus, a stream might
+be implemented as a pointer to a "struct stream."  For the LEDs or the
+pushbuttons, it might include a pointer to a structure that has
+information about that kind of device (let's refer to this as the
+"struct device") and also a second field that indicates which specific
+device is open.  So, there might be three "struct devices" created:
+one for the LEDs, one for the pushbuttons, and one for the in-memory
+file system.  For the LEDs, the second field might indicate which LED
+is open (the orange, the yellow, the green, or the blue).  For the
+pushbuttons, the second field might indicate which pushbutton is open
+(SW1 or SW2).  The "struct device" might contain function pointers to
+routines for that specific device to perform fgetc, fputc, and fclose
+for that kind of device.  Those routines might be parameterized by the
+second field in the "struct stream" to identify the specific device
+(e.g. the specific LED or pushbutton).  For the in-memory file system,
+more information is needed to remember the state of the operation.
+
+All associations for streams that have been opened should be stored in
+the PCB struct that was created for Problem Set 2.  When processes are
+fully-implemented in Problem Set 6, these stream associations will be
+per-process (rather than global).  This will allow, for example, each
+process to have its own stdin, stdout, and stderr.
+
+You should design your own methodology for naming devices and files.
+For example, if you want to model your system after a Windows-like
+naming convention, you might name devices with a letter (or a short
+string) to specify the device, followed by a colon.  Similarly, a
+device that supports named files might use a name which starts with a
+letter (or a short string) to identify the device, followed by a
+colon, followed by the file name.  You should decide which characters
+are allowed in your file names and enforce those constraints.  Support
+for file name extensions is not required.
+
+You will also be implementing an in-memory file system based on your
+myMalloc and myFree infrastructure.  This file system will allow named
+files to exist in RAM.  You can decide how those files are structured.
+Probably the simplest implementation will be based on a linked-list of
+malloc'ed memory blocks.  Another faster, but more complicated
+implementation, might be based on an index similarly to how a Unix
+file system is based on an inode structure.  Further details on the
+in-memory file system will be provided in class and in section.
+
+There are some minimum implementation requirements:
+
+  Filename length: You must allow at least 255 characters in a
+    filename (your limit can be larger) (Note: this allows the
+    filename length to be stored in a byte)
+
+  Number of files/directories in a directory: No limit (limited by
+    available memory)
+
+  Size of a file: No limit (limited by available memory)
+
+  Number of files in your file system: You must allow at least 64K
+    (= 65536) files in your file system (Note: this allows an
+    implementation that might use inodes to have a 16-bit inode
+    number)
+
+In addition to supporting the fopen, fgetc, fputc, and fclose
+functions on your in-memory file system, you also need to support a
+create and a delete function.  The create function will create a named
+file on the in-memory file system and the delete function will delete
+a named file from the in-memory file system.  You are *not* required
+to implement an interface to allow the caller to see the names of all
+files in the in-memory file system (that would allow something like
+"ls" or "dir" to be written).  You are not required to implement any
+sort of nested directories/folders.
+
+Your design should specify the behavior when certain operations are
+attempted.  These include: (1) Can any device be opened simultaneously
+more than once?, (2) Can any file be opened simultaneously more than
+once?, (3) What happens if a file already contains some bytes and an
+fputc is issued to that file?  If in the beginning or middle, is the
+file truncated at that point or does the fputc simply overwrite bytes?
+If at the end, is the file extended?
+
+Your implementation need not follow the same specifications as the
+Unix system calls of the same names, but it may be instructive to look
+at the documentation for those calls.  Feel free to simplify, alter,
+and/or extend the Unix calls as appropriate.
+
+So that we are able to test your device-independent I/O system, you
+must port your shell implementation from Unix to the K70 and add
+commands to your shell that call the fopen, fclose, fgetc, fputc,
+create, and delete system calls.  Don't try to get your gettimeofday
+and date commands working at this point in time.  Add an appropriate
+command for each of the fopen, fclose, fgetc, fputc, create and delete
+system calls.  Each command should issue the corresponding system call
+once.
+
+As always, all code should be heavily documented and commented.  All
+return codes and command line arguments should be checked and any
+errors appropriately handled.  The clarity and design of your code
+will count!
+
+(10 Points) Extra credit to be used for the programming portion only:
+Allow the names of files in a directory to be listed.
+
+(15 Points) Extra credit to be used for the programming portion only:
+Allow nested directories.
