@@ -11,7 +11,7 @@ This is an embedded operating systems development project that I worked on durin
 - Process control and task scheduling
 - Multi-threading
 - Interrupt handling
-- Morse-code transmission using Interrupt Service Routines (ISR)
+- Morse-code transmission using LEDs and Interrupt Service Routines (ISR)
 
 # References
 1)	TWR-K70F120M | Tower System Board | Kinetis MCUs | NXP Semiconductors website
