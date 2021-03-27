@@ -14,7 +14,7 @@ This is an embedded operating systems development project that I worked on durin
 - Morse-code transmission using Interrupt Service Routines (ISR)
 
 # References
-1)	TWR-K70F120M|Tower System Board| Kinetis MCUs | NXP Semiconductors website
+1)	TWR-K70F120M | Tower System Board | Kinetis MCUs | NXP Semiconductors website
 2)	See CSCI-E92: Principles of Operating Systems course under http://faa.com/
 
 # Acknowledgement
