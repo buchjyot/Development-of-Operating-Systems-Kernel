@@ -18,4 +18,4 @@ This is an embedded operating systems development project that I worked on durin
 2)	See CSCI-E92: Principles of Operating Systems course under http://faa.com/
 
 # Acknowledgement
-Prof. Jamie Frankel and Teaching Assistant Mark Ford.
+Prof. Jamie Frankel and Teaching Assistant Mark Ford at Harvard Extension School.
